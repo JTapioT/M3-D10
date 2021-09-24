@@ -219,12 +219,14 @@
       // make POST request, include requestBody object as an argument:
       postRequest(requestBody);
       }
+      
       // SAVE BUTTON
       let submitBtn = document.querySelector("#submitBtn");
       // EVENT LISTENER FOR SAVE BUTTON CLICK EVENT:
       submitBtn.addEventListener("click", handleSave);
 
-      async function fetchData(url, movieId, movieCategory) {
+      
+      async function fetchData() {
           try {
             let response = await fetch(url + "/" + movieCategory, {
               headers: {
@@ -263,7 +265,7 @@
       window.onload = () => {
         if(movieId) {
           document.querySelector("#editBtn").classList.remove("d-none");
-          fetchData(url, movieId, movieCategory)
+          fetchData()
         } else {
           document.querySelector("#submitBtn").classList.remove("d-none");
         }

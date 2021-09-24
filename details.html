@@ -57,19 +57,25 @@
     crossorigin="anonymous"></script>
 
     <script>
+      //TOKEN
       const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMWJlNjRiYjUzZDAwMTViMTllY2IiLCJpYXQiOjE2MzIzMTIyOTQsImV4cCI6MTYzMzUyMTg5NH0.3CzDPp4QqBgiD6bLQdmJvbu5eazZmxZjDOXlu7ADoEA";
 
+      //URL
       const url = "https://striveschool-api.herokuapp.com/api/movies/";
 
+      // SEARCH PARAMETERS
       const queryParameters = new URLSearchParams(window.location.search);
       const movieId = queryParameters.get("id");
       const movieCategory = queryParameters.get("category");
 
+      //EDIT BUTTON
       const editBtn = document.querySelector("#editBtn");
       editBtn.href = `./backoffice.html?id=${movieId}&category=${movieCategory}`;
 
+      //DELETE BUTTON
       const deleteBtn = document.querySelector("#deleteBtn");
 
+      // EVENT HANDLER FUNCTION FOR DELETE BUTTON
       async function handleDelete(event) {
         event.preventDefault();
 
@@ -92,7 +98,7 @@
 
       deleteBtn.addEventListener("click", handleDelete);
 
-
+      //DISPLAY MOVIE INFORMATION
       function displayMovieInfo(movie) {
         let movieInfo = document.querySelector("#movieInfo");
         movieInfo.innerHTML = `

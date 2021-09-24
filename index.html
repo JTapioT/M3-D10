@@ -252,7 +252,7 @@
           })
         }
       
-        async function fetchCategories(url) {
+        async function fetchCategories() {
           try {
             let response = await fetch(url, {
               headers: {
@@ -261,11 +261,10 @@
             });
             if(response.ok) {
               let movieCategories = await response.json();
-              console.log(movieCategories);
+              //console.log(movieCategories);
               fetchFromAllCategories(movieCategories);
               //return data;
             } else {
-              // Can I actually just throw response??
               throw response;
             }
           } catch (error) {
@@ -274,7 +273,7 @@
         }
 
       window.onload = () => {
-        fetchCategories(url);
+        fetchCategories();
       }
     </script>
 
