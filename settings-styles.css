@@ -1,0 +1,38 @@
+
+.settings-page {
+  background-color: #d8d8d8;
+}
+
+.membership-section,
+.plan-details-section,
+.settings-section {
+  border-bottom: 1px solid black;
+}
+
+.settings-header {
+  color: black;
+  border-bottom: 1px solid black;
+  padding-left: 0;
+}
+
+.col-4,
+.col-5 {
+  padding-left: 0;
+}
+.col-6 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.bottom-border-special {
+  border-bottom: 1px solid #7c7c7c;
+}
+
+a,
+a:hover {
+  color: blue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+

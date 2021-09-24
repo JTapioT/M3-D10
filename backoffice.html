@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./profile-styles.css" />
+  <title>M2-D5</title>
+</head>
+
+<body>
+  <!-- NETFLIX LOGO -->
+
+  <a href="./index.html"><img src="./assets/netflix_logo.png" width="100" style="object-fit: cover" alt="Netflix logo" class="ml-2 mt-2" /></a>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <!-- PROFILE TITLE ROW -->
+      
+      <div class="col-8 h1 pl-0 profile-title">Movie Information</div>
+      <!-- IMG AND TOOLS RIGHT TO THAT -->
+
+      <div class="col-8 pb-3" style="border-bottom: 1px solid grey">
+          <form>
+            <div class="form-group pt-3">
+              <label for="name"><h5 class="m-0 p-0">Name:</h5></label>
+              <input
+                id="name"
+                type="text"
+                class="form-control"
+                placeholder="Movie name"
+                required
+              />
+            </div>
+              <label for="description" class="pt-3"><h5 class="m-0 p-0">Description:</h5></label>
+              <textarea
+                id="description"
+                type="text"
+                class="form-control"
+                placeholder="Add description of the movie"
+                rows="10"
+                required
+              ></textarea>
+            <div class="form-group pt-3">
+              <label for="category"><h5 class="m-0 p-0">Category:</h5></label>
+              <input
+                id="category"
+                type="text"
+                class="form-control"
+                placeholder="Movie category"
+                required
+              />
+            </div>
+            <div class="form-group pt-3">
+              <label for="imageUrl"><h5 class="m-0 p-0">imageURL:</h5></label>
+              <input
+                id="imageUrl"
+                type="text"
+                class="form-control"
+                placeholder="Movie image URL here"
+                required
+              />
+            </div>
+          </form>
+      </div>
+
+      <div class="col-8">
+        <!-- BUTTON ROW -->
+        <div class="row mt-4">
+            <div id="submitBtn" class="col-4 d-none">
+              <a href="" class="custom-btn save-btn">SUBMIT</a>
+            </div>
+            <div id="editBtn" class="col-4 d-none">
+                <a href="" class="custom-btn save-btn">EDIT</a>
+            </div>
+            <div class="col-4">
+              <a href="./index.html" class="custom-btn tool-btn">CANCEL</a>
+            </div>
+        </div>
+      </div>
+      <!-- col-8 section closing tag -->
+
+    </div>
+    <!-- ROW DIV END -->
+  </div>
+  <!-- CONTAINER DIV END -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+
+    <script>
+      // TOKEN
+      const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMWJlNjRiYjUzZDAwMTViMTllY2IiLCJpYXQiOjE2MzIzMTIyOTQsImV4cCI6MTYzMzUyMTg5NH0.3CzDPp4QqBgiD6bLQdmJvbu5eazZmxZjDOXlu7ADoEA";
+
+      // URL
+      const url = "https://striveschool-api.herokuapp.com/api/movies";
+
+      // SEARCH PARAMETERS - ID
+      const searchParameters= new URLSearchParams(window.location.search);
+      const movieId = searchParameters.get("id");
+      const movieCategory = searchParameters.get("category");
+
+      // HANDLE PUT HTTP-REQUEST: 
+      async function putRequest(requestBody) {
+      try {
+        // HTTP-request:
+        let response = await fetch(url + "/" + movieId,  {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+          },
+          body: JSON.stringify(requestBody)
+        })
+
+        if(response.ok) {
+          // Get the data from server response:
+          let responseData = await response.json();
+
+          // Alert the updated info:
+          alert(`Movie edited in the list of movies successfully! \n
+          Name: ${responseData.name},\n
+          Brand: ${responseData.description},\n
+          Category: ${responseData.category},\n
+          createdAt: ${responseData.createdAt}`);
+          // Re-Direct to Home Page:
+          window.location.assign("./index.html");
+
+        } else {
+          throw response;
+        }
+      } catch(error) {
+          console.log(error);
+      }
+      }
+
+      // EVENT HANDLER FOR EDIT BUTTON CLICK:
+      function handleEdit(event) {
+        event.preventDefault();
+
+        // Gather values from form:
+        let requestBody = {
+          name: document.getElementById("name").value,
+          description: document.getElementById("description").value,
+          category: document.getElementById("category").value.toLowerCase(),
+          imageUrl:document.getElementById("imageUrl").value,
+        }
+        // make POST request, include requestBody object as an argument:
+        putRequest(requestBody);
+
+      }
+      
+      // EDIT BUTTON:
+      let editBtn = document.querySelector("#editBtn");
+      // EVENT HANDLER FOR EDIT BUTTON CLICK:
+      editBtn.addEventListener("click", handleEdit);
+
+      // HANDLE POST HTTP-REQUEST:
+      async function postRequest(requestBody) {
+
+      try {
+      // HTTP-request:
+      let response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": token
+        },
+        body: JSON.stringify(requestBody)
+      })
+
+      if(response.ok) {
+        // Get the data from server response:
+        let responseData = await response.json();
+
+        // Alert the updated info:
+        alert(`Movie added to the list of movies successfully! \n
+        Name: ${responseData.name},\n
+        Brand: ${responseData.description},\n
+        Category: ${responseData.category},\n
+        createdAt: ${responseData.createdAt}`);
+        // Re-Direct to Home Page:
+        window.location.assign("./index.html");
+
+        // Empty the form values:
+        /* document.getElementById("name").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("category").value = "";
+        document.getElementById("imgUrl").value = ""; */
+      } else {
+        throw response;
+      }
+      } catch(error) {
+        console.log(error);
+      }
+    }
+      
+      // EVENT HANDLER FOR SAVE BUTTON CLICK:
+      function handleSave(event) {
+      // Prevent default behavior of form -> Page reload:
+      event.preventDefault();
+
+      // Gather values from form:
+      let requestBody = {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        category: document.getElementById("category").value.toLowerCase(),
+        imageUrl:document.getElementById("imageUrl").value,
+      }
+      // make POST request, include requestBody object as an argument:
+      postRequest(requestBody);
+      }
+      // SAVE BUTTON
+      let submitBtn = document.querySelector("#submitBtn");
+      // EVENT LISTENER FOR SAVE BUTTON CLICK EVENT:
+      submitBtn.addEventListener("click", handleSave);
+
+      async function fetchData(url, movieId, movieCategory) {
+          try {
+            let response = await fetch(url + "/" + movieCategory, {
+              headers: {
+                "Authorization": token
+              }
+            });
+
+            if(response.ok) {
+              let categoryMovies = await response.json();
+              //console.log(categoryMovies);
+              let movieDetails;
+              if(categoryMovies.length > 1) {
+                movieDetails = categoryMovies.filter((movie) => {
+                  if(movie._id === movieId) {
+                    return movie;
+                  }
+                })[0];
+              } else {
+                movieDetails = categoryMovies[0];
+              }
+
+              // Populate input areas with movie details:
+              document.getElementById("name").value = `${movieDetails.name}`;
+              document.getElementById("description").value = `${movieDetails.description}`;
+              document.getElementById("category").value = `${movieDetails.category}`;
+              document.getElementById("imageUrl").value = `${movieDetails.imageUrl}`;
+              
+            } else {
+              throw response;
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+      window.onload = () => {
+        if(movieId) {
+          document.querySelector("#editBtn").classList.remove("d-none");
+          fetchData(url, movieId, movieCategory)
+        } else {
+          document.querySelector("#submitBtn").classList.remove("d-none");
+        }
+      }
+    </script>
+</body>
+
+<!-- 
+MAIN SECTION
+        <div class="d-flex flex-column">
+          <div>
+            <img src="./assets/avatar.png" alt="" style="width:100%; object-fit:cover;">
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <h4 class="">Movie Title</h4>
+            <h5 class="p-0 m-0">Movie title</h5>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <h4 class="">Movie Title</h4>
+            <h5 class="p-0 m-0">Movie title</h5>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <h4 class="">Information</h4>
+            <h5 class="p-0 m-0">Info</h5>
+          </div>
+        </div>
+ -->
+
+</html>

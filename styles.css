@@ -1,0 +1,155 @@
+/* PRESET USED FOR AREA WITHIN NAVIGATION WHERE search icon, bell icon etc. */
+* {
+  box-sizing: border-box;
+}
+
+/* 
+OVERALL BACKGROUND COLOR
+ALSO, HEIGHT CHANGED TO 100VH
+*/
+body {
+  background-color: black;
+  height: 100vh;
+}
+
+
+/* HEADER TYPOGRAPHY / COLORS */
+h1,h2,h3,h4,h5,h6,p {
+  color: #7c7c7c;
+}
+
+
+
+
+/* STYLING FOR SECTION TITLES */
+.section-title {
+  color: #f7f7f7;
+  vertical-align: bottom;
+}
+
+/* 
+NAVIGATION 
+MAKE SURE TO COME LATER AND MAKE NAVBAR RESPONSIVE AND ALSO THE RIGHT SIDE AVATAR BUTTON!
+*/
+
+.navbar {
+  background-color: black;
+}
+.nav-link, .nav-tools-kids {
+  color: #7c7c7c;
+}
+
+.nav-link.active {
+  color: #d8d8d8;
+}
+
+.search-icon {
+  filter: invert(100%) sepia(0%) saturate(7473%) hue-rotate(324deg) brightness(107%) contrast(107%);
+}
+
+.nav-tools {
+  margin-left: auto;
+  padding-right: 1em;
+}
+
+.nav-tools-img {
+  align-self: center;
+}
+
+.nav-tools-kids {
+  letter-spacing: 0.8px;
+  font-weight: 500;
+}
+
+.dropdown > a:hover {
+  background-color: black;
+  border-style: none;
+}
+.dropdown > a:focus {
+  background-color: black;
+  border-style: none;
+  box-shadow: none;
+}
+
+.dropdown-toggle::after {
+  color: white;
+}
+
+
+/* TV Shows - Genres button - Tool icons AREA */
+.genre-btn {
+  vertical-align: super;
+  text-decoration: none;
+  background-color: black;
+  color: #7c7c7c;
+  border: 0.4px solid white;
+  font-weight: bold;
+  padding: 0.2em 0.8em 0.1em;
+}
+
+.genre-btn:hover,
+.genre-btn:focus {
+  text-decoration: none;
+  border: 1px solid white;
+  color: #7c7c7c;
+  font-weight: bold;
+}
+
+
+.menu-tool-icon-group,
+.footer-icon {
+  filter: invert(57%) sepia(3%) saturate(0%) hue-rotate(45deg) brightness(84%) contrast(86%);
+}
+
+.menu-tool-icon-group {
+  padding-top: 0.5em;
+}
+
+.menu-tool-icon2 {
+  margin-left: 0.5em;
+  margin-right: 0.7em;
+}
+
+/* MAIN SECTION RELATED CSS */
+
+.section-img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 0.3em;
+}
+
+/* FOOTER AREA */
+/* THIS IS QUITE REDUNDANT TO ADD THIS MARGIN HERE BUT LOOKS NICE FOR NOW */
+footer {
+  margin-top: 10em;
+}
+
+.footer-icon {
+  margin-right: 1em;
+}
+
+.footer-btn {
+  text-decoration: none;
+  color:#7c7c7c;
+  padding: 0.4em 0.4em;
+  border: 1px solid #7c7c7c;
+}
+
+.footer-btn:hover {
+  text-decoration: none;
+  color:#7c7c7c;
+  background-color: #d8d8d8;
+}
+
+
+.footer-copyright {
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+
+
+
+/* SETTINGS PAGE */
+
+
